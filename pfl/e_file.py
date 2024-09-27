@@ -29,6 +29,7 @@ import requests
 
 VERSION='3.x.x'
 BASEURL='https://www.portagefilelist.de/query.php?file=%s'
+BASEURL_MORE='https://www.portagefilelist.de/?fs=%s#panchor'
 
 # the main method to run this.
 # options are
@@ -139,6 +140,10 @@ class Efile(object):
                     # Matched Files: /the/found/file /another/found/file;
                     files = sorted(set(vf['files']))
                     self.log(colored('\tMatched Files:'.ljust(22), 'green') + '%s' % ' '.join(files))
+
+                    # More Information: https://www.portagefilelist.de/?fs=file#panchor
+                    self.log(colored('\tMore Information:'.ljust(22), 'green') + BASEURL_MORE % self._options['file'])
+
                     self.log('')
 
             return 0, self._out
